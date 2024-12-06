@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 advent_of_code::solution!(5);
 
 fn median(x: &[u32]) -> u32 {
@@ -5,20 +7,18 @@ fn median(x: &[u32]) -> u32 {
 }
 
 pub fn part_one(input: &str) -> Option<u32> {
-    let mut split = input.split("\n\n");
-    let ordering_rules_input = split.next().expect("first section exists");
-    let page_numbers_input = split.next().expect("second section exists");
+    let (ordering_rules_input, page_numbers_input) =
+        input.split_once("\n\n").expect("two sections");
 
     // parse input sections into vectors of ordering rules and page number updates
     let ordering_rules: Vec<(u32, u32)> = ordering_rules_input
         .lines()
         .map(|line| {
-            let pair: Vec<u32> = line
-                .split("|")
-                .map(|n| n.parse().expect("integer exists"))
-                .collect();
-
-            (pair[0], pair[1])
+            let rule = line.split_once("|").expect("two integers in rule");
+            (
+                rule.0.parse().expect("integer exists"),
+                rule.1.parse().expect("integer exists"),
+            )
         })
         .collect();
     let page_numbers: Vec<Vec<u32>> = page_numbers_input
@@ -54,8 +54,69 @@ pub fn part_one(input: &str) -> Option<u32> {
     Some(total)
 }
 
+fn sort_by_ordering_rules(vec: &mut [u32], ordering_rules: &[(u32, u32)]) {
+    vec.sort_by(|&a, &b| {
+        if ordering_rules
+            .iter()
+            .any(|&(first, second)| first == a && second == b)
+        {
+            Ordering::Less
+        } else if ordering_rules
+            .iter()
+            .any(|&(first, second)| first == b && second == a)
+        {
+            Ordering::Greater
+        } else {
+            Ordering::Equal
+        }
+    });
+}
+
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    let (ordering_rules_input, page_numbers_input) =
+        input.split_once("\n\n").expect("two sections");
+
+    // parse input sections into vectors of ordering rules and page number updates
+    let ordering_rules: Vec<(u32, u32)> = ordering_rules_input
+        .lines()
+        .map(|line| {
+            let rule = line.split_once("|").expect("two integers in rule");
+            (
+                rule.0.parse().expect("integer exists"),
+                rule.1.parse().expect("integer exists"),
+            )
+        })
+        .collect();
+    let page_numbers: Vec<Vec<u32>> = page_numbers_input
+        .lines()
+        .map(|line| {
+            line.split(",")
+                .map(|n| n.parse().expect("integer exist"))
+                .collect()
+        })
+        .collect();
+
+    // iterate over page number updates and check all ordering rules for correct order
+    // sum medians of all incorrectly ordered page number updates after fixing
+    let mut total: u32 = 0;
+    for update in page_numbers {
+        let mut mut_update = update.clone();
+        for rule in ordering_rules.clone() {
+            if let (Some(first_pos), Some(second_pos)) = (
+                update.iter().position(|&page_num| page_num == rule.0),
+                update.iter().position(|&page_num| page_num == rule.1),
+            ) {
+                // if order is incorrect, sort according to ordering rules
+                if second_pos < first_pos {
+                    sort_by_ordering_rules(&mut mut_update, &ordering_rules);
+                    total += median(&mut_update);
+                    break;
+                }
+            }
+        }
+    }
+
+    Some(total)
 }
 
 #[cfg(test)]
