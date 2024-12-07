@@ -93,9 +93,7 @@ pub fn part_two(input: &str) -> Option<u64> {
                     equation_total *= num;
                 // handle concatenation operator (|)
                 } else {
-                    let new_num: u64 = (equation_total.to_string() + &num.to_string())
-                        .parse()
-                        .expect("concatenation produces new number");
+                    let new_num: u64 = equation_total * 10u64.pow(num.ilog10() + 1) + num;
                     equation_total = new_num;
                 }
             }
