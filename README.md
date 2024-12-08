@@ -23,24 +23,7 @@ Solutions for [Advent of Code](https://adventofcode.com/) in [Rust](https://www.
 **Total: 6361.33ms**
 <!--- benchmarking table --->
 
----
-
-## Template setup
-
-This template supports all major OS (macOS, Linux, Windows).
-
-###  📝 Create your repository
-
-1.  Open [the template repository](https://github.com/fspoettel/advent-of-code-rust) on Github.
-2.  Click [Use this template](https://github.com/fspoettel/advent-of-code-rust/generate) and create your repository.
-3.  Clone your repository to your computer.
-4.  If you are solving a previous year's advent of code, change the `AOC_YEAR` variable in `.cargo/config.toml` to reflect the year you are solving.
-
-### 💻 Setup rust
-
-1.  Install the [Rust toolchain](https://www.rust-lang.org/tools/install).
-2.  (recommended) Install the [rust-analyzer](https://rust-analyzer.github.io/manual.html) extension for your code editor.
-3.  (optional) Install a native debugger. If you are using VS Code, [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) is a good option.
+[Template repository](https://github.com/fspoettel/advent-of-code-rust) on Github.
 
 ---
 
@@ -285,21 +268,9 @@ The command will output some basic stats to the command-line and generate a `dha
 
 You can pass the report a tool like [dh-view](https://nnethercote.github.io/dh_view/dh_view.html) to view a detailed breakdown of heap allocations.
 
-### Use VS Code to debug your code
-
-1.  Install [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) and [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb).
-2.  Set breakpoints in your code. [^3]
-3.  Click _Debug_ next to the unit test or the _main_ function. [^4]
-4.  The debugger will halt your program at the specific line and allow you to inspect the local stack. [^5]
-
 ## Useful crates
 
--   [itertools](https://crates.io/crates/itertools): Extends iterators with extra methods and adaptors. Frequently useful for aoc puzzles.
--   [regex](https://crates.io/crates/regex): Official regular expressions implementation for Rust.
-
 A curated list of popular crates can be found on [blessred.rs](https://blessed.rs/crates).
-
-Do you have aoc-specific crate recommendations? [Share them!](https://github.com/fspoettel/advent-of-code-rust/edit/main/README.md)
 
 ## Common pitfalls
 
@@ -309,11 +280,3 @@ Do you have aoc-specific crate recommendations? [Share them!](https://github.com
 
 [^1]: The session cookie might expire after a while (~1 month) which causes the downloads to fail. To fix this issue, refresh the `.adventofcode.session` file.
 [^2]: The session cookie might expire after a while (~1 month) which causes the automated workflow to fail. To fix this issue, refresh the AOC_SESSION secret.
-[^3]:
-    <img src="https://user-images.githubusercontent.com/1682504/198838369-453dc22c-c645-4803-afe0-fc50d5a3f00c.png" alt="Set a breakpoint" width="450" />
-
-[^4]:
-    <img alt="Run debugger" src="https://user-images.githubusercontent.com/1682504/198838372-c89369f6-0d05-462e-a4c7-8cd97b0912e6.png" width="450" />
-
-[^5]:
-    <img alt="Inspect debugger state" src="https://user-images.githubusercontent.com/1682504/198838373-36df6996-23bf-4757-9335-0bc4c1db0276.png" width="450" />
