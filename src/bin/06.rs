@@ -152,8 +152,8 @@ pub fn part_one(input: &str) -> Option<u32> {
     // debug printing
     // for i in 0..n_rows {
     //     for j in 0..n_cols {
-    //         if positions.contains(&(j, i)) {
-    //             print!("X");
+    // if positions.contains(&(j, i)) {
+    //     print!("X");
     //         } else if obstacle_positions.contains(&(j, i)) {
     //             print!("#");
     //         } else if guard_pos == (j, i) {
